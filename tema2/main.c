@@ -117,17 +117,21 @@ void buscarItem(const Item mochila[], int totalItens) {
     fgets(nomeBusca, sizeof(nomeBusca), stdin);
     limparNovaLinha(nomeBusca);
 
+    int encontrado = 0;
     for (int i = 0; i < totalItens; i++) {
         if (strcmp(mochila[i].nome, nomeBusca) == 0) {
             printf("Item encontrado:\n");
             printf("Nome: %s\n", mochila[i].nome);
             printf("Tipo: %s\n", mochila[i].tipo);
             printf("Quantidade: %d\n", mochila[i].quantidade);
-            return;
+            encontrado = 1;
+            break;
         }
     }
 
-    printf("Item nao encontrado.\n");
+    if (!encontrado) {
+        printf("Item nao encontrado. Verifique o nome e tente novamente.\n");
+    }
 }
 
 int main(void) {
@@ -142,7 +146,7 @@ int main(void) {
         printf("1 - Cadastrar item\n");
         printf("2 - Remover item\n");
         printf("3 - Listar itens\n");
-        printf("4 - Buscar item\n");
+        printf("4 - Buscar item por nome\n");
         printf("5 - Sair\n");
         printf("Opcao: ");
         if (scanf("%d", &opcao) != 1) {
